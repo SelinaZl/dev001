@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射文件，namespace命名空间：对应一个完整的全限定名，必须和对应的接口路径相匹配-->
+<mapper namespace="com.fc.com.fc.dao.StudentDao">
+    <select id="findById" resultType="com.fc.com.fc.entity.Student" parameterType="Integer">
+        select * from student where id = #{id}
+    </select>
+
+    <select id="findByIdAndName" resultType="com.fc.com.fc.entity.Student">
+        select * from student where id = #{id} and name = #{name}
+    </select>
+
+    <select id="findByIdAndGender" resultType="com.fc.com.fc.entity.Student">
+        select * from student where id = #{id} and gender = #{gender}
+    </select>
+
+    <insert id="insert">
+        insert into student(name, age, gender, info) VALUES (#{name}, #{age}, #{gender}, #{info})
+    </insert>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    init-method:会在Spring容器创建完对象后执行
+    destroy-method:会在Spring容器关闭前，销毁对象时执行
+    lazy-init:是否开启懒加载
+    -->
+    <bean id="dog" class="com.fc.com.fc.entity.Dog">
+        <property name="breed" value="萨摩耶"/>
+        <property name="color" value="白色"/>
+    </bean>
+
+    <bean id="complexType" class="com.fc.com.fc.entity.ComplexType">
+        <property name="objects">
+            <array>
+                <value>1</value>
+                <value>小天</value>
+                <value>true</value>
+                <value>3.14</value>
+            </array>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>营养快线</value>
+                <value>可乐</value>
+                <value>雪碧</value>
+                <value>六个核弹</value>
+            </list>
+        </property>
+
+        <property name="set">
+            <set>
+                <value>123</value>
+                <value>456</value>
+                <value>789</value>
+            </set>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry key="小天天" value="太阳"> </entry>
+                <entry key="张昊" value-ref="dog" ></entry>
+            </map>
+        </property>
+    </bean>
+
+
+
+
+
+
+
+</beans>

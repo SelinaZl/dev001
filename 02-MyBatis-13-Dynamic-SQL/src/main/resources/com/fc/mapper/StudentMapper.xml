@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--映射文件，namespace命名空间：对应一个完整的全限定名，必须和对应的接口路径相匹配-->
+<mapper namespace="com.fc.com.fc.dao.StudentDao">
+    <sql id="field">
+        id, name, age, gender, info
+    </sql>
+    <select id="findAll" resultType="com.fc.com.fc.entity.Student">
+        select <include refid="field"/>
+        from student
+    </select>
+
+    <select id="findByKeyword" resultType="com.fc.com.fc.entity.Student">
+        select <include refid="field"/>
+        from student
+        where 1 = 1
+        <if test="name != null">
+            and name like #{name}
+        </if>
+        <if test="age != null">
+            and age like #{age}
+        </if>
+    </select>
+
+    <!--根据条件查询学生-->
+    <select id="findByStudent" resultType="com.fc.com.fc.entity.Student">
+        select <include refid="field"/>
+        from student
+        <where>
+            <if test="id != null">
+                or id = #{id}
+            </if>
+
+            <if test="name">
+                or name = #{name}
+            </if>
+
+            <if test="age != null">
+                or id = #{age}
+            </if>
+
+            <if test="gender">
+                or gender = #{gender}
+            </if>
+
+            <if test="info != null">
+                or id = #{info}
+            </if>
+        </where>
+    </select>
+
+    <!--修改学生-->
+    <update id="update">
+        update student
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+
+            <if test="age != null">
+                age = #{age},
+            </if>
+
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+
+            <if test="info != null">
+                info = #{info},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--根据条件查询学生trim-->
+    <!--trim可以声明指定的前后缀以及忽略指定的前后缀-->
+    <select id="findByStudentOnTrim" resultType="com.fc.com.fc.entity.Student">
+        select
+        <include refid="field"/>
+        from student
+        <trim prefix="where" prefixOverrides="and">
+            <if test="id != null">
+                and id = #{id}
+            </if>
+
+            <if test="name != null">
+                and name = #{name}
+            </if>
+
+            <if test="age != null">
+                and age = #{age}
+            </if>
+
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+
+            <if test="info != null">
+                and info = #{info}
+            </if>
+        </trim>
+    </select>
+
+    <!--用trim修改学生-->
+    <update id="updateOnTrim">
+        update student
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null">
+                name = #{name},
+            </if>
+
+            <if test="age != null">
+                age = #{age},
+            </if>
+
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+
+            <if test="info != null">
+                info = #{info},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMore">
+        delete from student where id in
+        <foreach collection="array" separator="," open="(" close=")" index="i" item="id">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

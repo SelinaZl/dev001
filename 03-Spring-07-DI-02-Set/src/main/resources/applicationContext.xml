@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    init-method:会在Spring容器创建完对象后执行
+    destroy-method:会在Spring容器关闭前，销毁对象时执行
+    lazy-init:是否开启懒加载
+    -->
+
+    <bean id="car" class="com.fc.com.fc.entity.Car">
+        <property name="color" value="绿色"/>
+        <property name="spend" value="110"/>
+    </bean>
+
+    <bean id="person" class="com.fc.com.fc.entity.Person">
+        <property name="name" value="天天"/>
+        <property name="gender" value="男"/>
+        <property name="car" ref="car"/>
+    </bean>
+
+
+
+
+
+
+
+
+
+</beans>
